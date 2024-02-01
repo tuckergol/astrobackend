@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Include your styles here */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input {
+            margin-bottom: 10px;
+        }
+        #loginForm {
+            display: inline-block;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <form id="loginForm">
+        <label for="uid">Username:</label>
+        <input type="text" id="uid" name="uid" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <label for="birthYear">Year of Birth:</label>
+        <input type="text" id="birthYear" name="birthYear" required pattern="\d{4}" title="Enter a 4-digit year"><br>
+
+        <button type="button" onclick="login()">Login</button>
+    </form>
+
+    <script>
+        // JavaScript for Fetch
+        function login() {
+            const uid = document.getElementById('uid').value;
+            const password = document.getElementById('password').value;
+            const birthYear = document.getElementById('birthYear').value;
+
+            fetch('http://127.0.0.1:5000/api/users/authenticate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ uid, password, birthYear }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === 'Authentication successful') {
+                    console.log('Login success:', data);
+                    // Perform actions on successful login
+                } else {
+                    console.error('Login failure:', data.message);
+                    // Handle login failure
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
