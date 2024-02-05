@@ -81,7 +81,18 @@ def authenticate_user_route():
             response = {'message': 'Authentication successful', 'redirect': 'crud.html', 'token': token}
         else:
             response = {'message': 'Authentication successful', 'redirect': None, 'token': token}
-        return jsonify(response), 200
+        resp_obj = jsonify(response)
+        resp_obj.set_cookie("jwt", token,
+                    max_age=3600,
+                    secure=True,
+                    httponly=True,
+                    path='/',
+                    samesite='None'  # This is the key part for cross-site requests
+
+                    # domain="frontend.com"
+                    )
+
+        return resp_obj, 200
     else:
         response = {'message': 'Invalid credentials'}
         return jsonify(response), 401
