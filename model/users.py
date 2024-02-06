@@ -207,7 +207,7 @@ def initUsers():
         u2 = User(name='Nicholas Tesla', uid='niko', password='123niko', dob=date(1856, 7, 10))
         u3 = User(name='Alexander Graham Bell', uid='lex')
         u4 = User(name='Grace Hopper', uid='hop', password='123hop', dob=date(1906, 12, 9))
-        u6 = User(name='Abdullah Khanani', uid='abdullah', password='abdullahk', dob=date(2008, 12, 26``))
+        u6 = User(name='Abdullah Khanani', uid='abdullah', password='abdullahk', dob=date(2008, 12, 26))
         users = [u1, u2, u3, u4, u5]
 
         """Builds sample user/note(s) data"""
